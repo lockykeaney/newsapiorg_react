@@ -17,7 +17,6 @@ import getArticlesBySource from "./services/getArticlesBySource";
 
 type ArticleResponse = Response & { articles: Article[] };
 
-const { VITE_API_KEY } = import.meta.env;
 const PAGE_SIZE = 10;
 
 function App() {
@@ -55,8 +54,8 @@ function App() {
       setIsLoading(true);
       getArticlesBySource({
         source: selectedSource.value,
-        pageSize: 20,
-        pageNumber,
+        pageSize: 50,
+        pageNumber: 1,
       })
         .then((res) => {
           setArticles(res.articles);
@@ -95,7 +94,11 @@ function App() {
         ) : error ? (
           <p>{error}</p>
         ) : (
-          <div>
+          <div
+            css={{
+              marginTop: 20,
+            }}
+          >
             {articles.map((article: Article, index: number) => (
               <NewsItem article={article} key={`article_${index}`} />
             ))}

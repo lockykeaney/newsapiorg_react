@@ -8,7 +8,9 @@ const NewsItem = ({ article }: { article: Article }) => {
   return (
     <div
       css={{
-        border: "1px solid black",
+        marginBottom: 20,
+        paddingBottom: 10,
+        borderBottom: "1px solid lightGrey",
       }}
     >
       <div>
@@ -18,11 +20,23 @@ const NewsItem = ({ article }: { article: Article }) => {
           css={(theme) => ({
             ...theme.fonts.heading,
             textDecoration: "none",
+            fontWeight: "600",
+            color: "black",
+            ["hover"]: {
+              textDecoration: "underline",
+            },
           })}
         >
           {article.title}
         </a>
-        <p>{article.author}</p>
+        <p
+          css={{
+            marginTop: 5,
+            marginBottom: 10,
+          }}
+        >
+          By {article.author}
+        </p>
       </div>
       <div
         css={{
@@ -30,8 +44,10 @@ const NewsItem = ({ article }: { article: Article }) => {
           justifyContent: "flex-start",
         }}
       >
-        <img src={article.urlToImage} css={{ height: 80, marginRight: 20 }} />
-        <p>{article.description}</p>
+        {article.urlToImage && (
+          <img src={article.urlToImage} css={{ height: 80, marginRight: 20 }} />
+        )}
+        {article.description && <p>{article.description}</p>}
       </div>
     </div>
   );
